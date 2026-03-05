@@ -27,7 +27,8 @@ RUN \
 
 COPY --chown=node:node . .
 
-# Whitelabel text replacement
+# ===== WHITELABEL =====
+# Text replacements
 RUN find client/src -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js" \) \
         -exec sed -i 's/LibreChat/Trico/g' {} + && \
     find client -maxdepth 1 -type f -name "*.html" \
@@ -35,7 +36,7 @@ RUN find client/src -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o
     find client/src -type f \( -name "*.tsx" -o -name "*.ts" \) \
         -exec sed -i 's/Every AI for Everyone/Your Intelligent Assistant/g' {} + 2>/dev/null || true
 
-# Replace external links
+# Links
 RUN find client/src -type f \( -name "*.tsx" -o -name "*.ts" \) \
         -exec sed -i 's|https://librechat.ai|https://chat.sadid.my.id/tos|g' {} + 2>/dev/null || true && \
     find client/src -type f \( -name "*.tsx" -o -name "*.ts" \) \
@@ -47,7 +48,7 @@ RUN find client/src -type f \( -name "*.tsx" -o -name "*.ts" \) \
     find client/src -type f \( -name "*.tsx" -o -name "*.ts" \) \
         -exec sed -i 's|github.com/danny-avila/LibreChat|chat.sadid.my.id|g' {} + 2>/dev/null || true
 
-# CSS overrides to hide UI elements (each line separate, no comments)
+# CSS: hide UI elements
 RUN echo '' >> client/src/style.css && \
     echo '[data-testid="bookmark-button"] { display: none !important; }' >> client/src/style.css && \
     echo 'button[aria-label*="bookmark" i] { display: none !important; }' >> client/src/style.css && \
@@ -59,7 +60,7 @@ RUN echo '' >> client/src/style.css && \
     echo 'a[href*="discord.gg"] { display: none !important; }' >> client/src/style.css && \
     echo 'a[href*="github.com/danny-avila"] { display: none !important; }' >> client/src/style.css
 
-# Build frontend with all changes baked in
+# Build frontend
 RUN \
     NODE_OPTIONS="--max-old-space-size=${NODE_MAX_OLD_SPACE_SIZE}" npm run frontend ; \
     npm prune --production ; \
