@@ -61,7 +61,6 @@ RUN set -e && \
 # Inject CSS overrides
 RUN cat >> client/src/style.css << 'CSSEOF'
 
-/* ===== TRICO CUSTOM THEME ===== */
 [data-testid="bookmark-button"],
 button[aria-label*="bookmark" i],
 button[aria-label*="Bookmark" i] { display: none !important; }
