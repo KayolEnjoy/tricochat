@@ -88,11 +88,11 @@ export default defineConfig(({ command }) => ({
       },
       includeAssets: [],
       manifest: {
-        name: 'LibreChat',
-        short_name: 'LibreChat',
+        name: 'Trico',
+        short_name: 'Trico',
         display: 'standalone',
         background_color: '#000000',
-        theme_color: '#009688',
+        theme_color: '#4F46E5',
         icons: [
           {
             src: 'assets/favicon-32x32.png',
